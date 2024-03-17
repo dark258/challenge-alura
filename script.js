@@ -40,13 +40,19 @@ function encriptarTexto(){
     if (textoIngresado === ""){
         mostrarMensaje("No ha ingresado nada", "red");
     }else {
-        
+        //esta variable recibirá eventualmente el texto a medida que se arma
         let codificado = "";
+
+        //recorro el texto proporcionado
         for (let i = 0; i < textoIngresado.length; i++){
-            //Buscar si la letra está en la matriz de código
+            
+            //Indicará si la letra del texto que veo está en la matriz de código
             let encontrada = false;
             
+            //Mientras recorro la matriz y no haya encontrado una letra aún, comparo
+            //la letra con la letra del texto donde voy
             for (let j =  0; j < matriz_cod.length && !encontrada ;j++)
+                // encontré una letra, por lo que agrego la parte de la matriz que lo codifica
                 if (matriz_cod[j][0].toLowerCase() == textoIngresado[i].toLowerCase()) {
                     codificado += matriz_cod[j][1];
                     encontrada = true;
@@ -54,10 +60,19 @@ function encriptarTexto(){
                 //Si no se encuentra la letra, agregarla tal cual
                 if (!encontrada) codificado+= textoIngresado[i];
         }
+        //Muestra el texto codificado
         mostrarMensaje(`Codificación: ${codificado}`, "green");
     }
 };
 
+/*
+    Función para desencriptar el texto
+    -  Revisa el texto ingresado
+    -  Si está vacío muestra un mensaje de error
+    -  Si no lo está, recorre el texto y reemplaza 
+       cada pieza de texto encriptado por su letra 
+       correspondiente en la matriz "matriz_cod"
+*/
 function desencriptarTexto(){
     const textoIngresado = campo_texto.value;
     if (textoIngresado === ""){
